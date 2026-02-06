@@ -1,13 +1,15 @@
-// src/pages/Books/Books.tsx
+// src/pages/Books/Books.tsx - OPTIMIZED FOR PERFORMANCE
 
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { SearchBar, BookCard, Loading } from '@/components';
 import { useBookStore } from '@/store/bookStore';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import { GENRES } from '@/utils/constants';
 import styles from './Books.module.css';
+
+// Memoize BookCard to prevent unnecessary re-renders
+const MemoizedBookCard = memo(BookCard);
 
 export const Books: React.FC = () => {
   const navigate = useNavigate();
@@ -23,9 +25,9 @@ export const Books: React.FC = () => {
     loadMore,
   } = useBookStore();
 
-  // Fetch initial data
+  // Fetch initial data only once
   useEffect(() => {
-    if (books.length === 0 && !isLoading) {
+    if (books.length === 0 && !isLoading && !filters.searchQuery) {
       fetchBooks(true);
     }
   }, []);
@@ -37,6 +39,7 @@ export const Books: React.FC = () => {
     isLoading: isLoadingMore,
   });
 
+  // Optimized search handler - memoized
   const handleSearch = useCallback(
     (query: string) => {
       setFilters({ searchQuery: query });
@@ -83,20 +86,19 @@ export const Books: React.FC = () => {
           </div>
         ) : (
           <>
-            <motion.div
-              className={styles.booksGrid}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
+            <div className={styles.booksGrid}>
               {books.map((book, index) => (
-                <BookCard key={book.id} book={book} index={index} />
+                <MemoizedBookCard 
+                  key={`${book.id}-${index}`} 
+                  book={book} 
+                  index={index} 
+                />
               ))}
-            </motion.div>
+            </div>
 
             {hasMore && (
               <div ref={scrollTrigger} className={styles.scrollTrigger}>
-                {isLoadingMore && <Loading message="Loading more books..." />}
+                {isLoadingMore && <Loading message="Loading more..." />}
               </div>
             )}
           </>

@@ -1,5 +1,3 @@
-// src/pages/Home/Home.tsx
-
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { GenreCard } from '@/components';
@@ -25,12 +23,10 @@ export const Home: React.FC = () => {
         transition={{ duration: 0.6 }}
       >
         <h1 className={styles.title}>
-          The Gutenberg
-          <span className={styles.titleAccent}>Literary Archive</span>
+          Gutenberg Project
         </h1>
         <p className={styles.subtitle}>
-          Explore thousands of classic works from Project Gutenberg's vast collection.
-          Discover timeless literature spanning centuries of human creativity.
+          A social cataloging website that allows you to freely search it's database of books, annotations, and reviews.
         </p>
       </motion.div>
 
@@ -48,25 +44,6 @@ export const Home: React.FC = () => {
             index={index}
           />
         ))}
-      </motion.div>
-
-      <motion.div
-        className={styles.footer}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.6 }}
-      >
-        <p className={styles.footerText}>
-          All books are from the public domain courtesy of{' '}
-          <a
-            href="https://www.gutenberg.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.footerLink}
-          >
-            Project Gutenberg
-          </a>
-        </p>
       </motion.div>
     </div>
   );

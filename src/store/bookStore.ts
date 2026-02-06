@@ -1,4 +1,4 @@
-// src/store/bookStore.ts
+// src/store/bookStore.ts - OPTIMIZED FOR PERFORMANCE
 
 import { create } from 'zustand';
 import { Book, SearchFilters } from '@/types/book.types';
@@ -38,6 +38,9 @@ const initialState = {
   error: null,
 };
 
+// AbortController for canceling pending requests
+let abortController: AbortController | null = null;
+
 export const useBookStore = create<BookState>((set, get) => ({
   ...initialState,
 
@@ -45,7 +48,15 @@ export const useBookStore = create<BookState>((set, get) => ({
     const state = get();
     
     // Prevent duplicate requests
-    if (state.isLoading || state.isLoadingMore) return;
+    if (state.isLoading || state.isLoadingMore) {
+      // Cancel previous request if new one comes
+      if (abortController) {
+        abortController.abort();
+      }
+    }
+
+    // Create new AbortController for this request
+    abortController = new AbortController();
 
     set({ 
       isLoading: reset, 
@@ -57,34 +68,53 @@ export const useBookStore = create<BookState>((set, get) => ({
       const page = reset ? 1 : state.currentPage;
       const response = await apiService.fetchBooks(page, state.filters);
 
-      set({
-        books: reset ? response.results : [...state.books, ...response.results],
-        currentPage: page,
-        hasMore: !!response.next,
-        totalCount: response.count,
-        isLoading: false,
-        isLoadingMore: false,
-      });
-    } catch (error) {
-      set({
-        error: 'Failed to fetch books. Please try again.',
-        isLoading: false,
-        isLoadingMore: false,
-      });
+      // Only update if this request wasn't aborted
+      if (!abortController.signal.aborted) {
+        set({
+          books: reset ? response.results : [...state.books, ...response.results],
+          currentPage: page,
+          hasMore: !!response.next,
+          totalCount: response.count,
+          isLoading: false,
+          isLoadingMore: false,
+        });
+      }
+    } catch (error: any) {
+      // Don't show error if request was aborted (user initiated new search)
+      if (error.name !== 'AbortError' && error.name !== 'CanceledError') {
+        set({
+          error: 'Failed to fetch books. Please try again.',
+          isLoading: false,
+          isLoadingMore: false,
+        });
+      }
     }
   },
 
   setFilters: (newFilters) => {
+    // Cancel any pending requests when filters change
+    if (abortController) {
+      abortController.abort();
+    }
+
     set((state) => ({
       filters: { ...state.filters, ...newFilters },
       currentPage: 1,
-      books: [],
+      books: [], // Clear books immediately for faster perceived performance
+      isLoading: true, // Show loading immediately
     }));
-    // Automatically fetch with new filters
-    get().fetchBooks(true);
+    
+    // Fetch with slight delay to allow for debouncing
+    setTimeout(() => {
+      get().fetchBooks(true);
+    }, 0);
   },
 
   resetFilters: () => {
+    if (abortController) {
+      abortController.abort();
+    }
+    
     set({ filters: {}, currentPage: 1, books: [] });
     get().fetchBooks(true);
   },
@@ -98,6 +128,9 @@ export const useBookStore = create<BookState>((set, get) => ({
   },
 
   reset: () => {
+    if (abortController) {
+      abortController.abort();
+    }
     set(initialState);
   },
 }));

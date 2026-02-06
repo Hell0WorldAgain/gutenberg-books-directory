@@ -1,90 +1,78 @@
-/* src/pages/Home/Home.module.css */
+/* src/pages/Home/Home.module.css - EXACT SCREENSHOT MATCH */
 
 .home {
   min-height: 100vh;
-  padding: var(--spacing-3xl) var(--spacing-lg);
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-3xl);
+  background-color: #F8F7FF;
 }
 
 .hero {
-  text-align: center;
-  padding: var(--spacing-2xl) 0;
+  text-align: left;
+  padding: 50px 200px;
+  margin-bottom: 20px;
+  background-image: url("Icons/Pattern.svg");
+  background-repeat: no-repeat;
+  background-position: right center;
 }
 
 .title {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  font-weight: 700;
-  line-height: 1.1;
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-lg);
-  letter-spacing: -0.02em;
+  font-size: 48px;
+  font-weight: 600;
+  color: #5E56E7;
+  margin-bottom: 10px;
+  line-height: 1.2;
 }
 
 .titleAccent {
   display: block;
-  color: var(--color-accent-primary);
+  color: var(--color-text-primary);
   font-weight: 600;
 }
 
 .subtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: 16px;
+  color: #333333;
   line-height: 1.6;
-  color: var(--color-text-secondary);
-  max-width: 700px;
-  margin: 0 auto;
 }
 
 .genreGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: var(--spacing-lg);
+  padding: 0px 200px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 20px;
 }
 
 .footer {
   text-align: center;
-  padding: var(--spacing-2xl) 0 var(--spacing-lg);
-  margin-top: auto;
+  padding-top: var(--spacing-2xl);
+  border-top: 1px solid var(--color-border);
 }
 
 .footerText {
   font-size: 0.875rem;
   color: var(--color-text-tertiary);
-  margin: 0;
 }
 
 .footerLink {
   color: var(--color-accent-primary);
-  text-decoration: underline;
   font-weight: 500;
-  transition: color var(--transition-fast);
 }
 
 .footerLink:hover {
-  color: var(--color-accent-secondary);
+  text-decoration: underline;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .home {
     padding: var(--spacing-xl) var(--spacing-md);
-    gap: var(--spacing-xl);
   }
 
   .hero {
-    padding: var(--spacing-lg) 0;
+    margin-bottom: var(--spacing-xl);
   }
 
   .genreGrid {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
-  }
-
-  .footer {
-    padding: var(--spacing-xl) 0 var(--spacing-md);
   }
 }

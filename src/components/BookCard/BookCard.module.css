@@ -1,8 +1,7 @@
-/* src/components/BookCard/BookCard.module.css */
+/* src/components/BookCard/BookCard.module.css - EXACT SCREENSHOT MATCH */
 
 .bookCard {
   background: white;
-  border: 1px solid var(--color-border-light);
   border-radius: var(--radius-md);
   overflow: hidden;
   cursor: pointer;
@@ -13,13 +12,8 @@
 }
 
 .bookCard:hover {
-  border-color: var(--color-accent-primary);
   box-shadow: var(--shadow-lg);
-}
-
-.bookCard:focus-visible {
-  outline: 2px solid var(--color-accent-primary);
-  outline-offset: 2px;
+  transform: translateY(-4px);
 }
 
 .coverContainer {
@@ -52,17 +46,13 @@
 
 .placeholderIcon {
   font-size: 3rem;
-  opacity: 0.3;
+  opacity: 0.2;
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(26, 22, 20, 0.8) 0%,
-    rgba(26, 22, 20, 0) 50%
-  );
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 50%);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -78,7 +68,7 @@
 .viewLabel {
   color: white;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -92,8 +82,7 @@
 }
 
 .title {
-  font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.3;
   color: var(--color-text-primary);
@@ -106,7 +95,7 @@
 }
 
 .author {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: var(--color-text-secondary);
   margin: 0;
   display: -webkit-box;
@@ -117,30 +106,19 @@
 }
 
 .meta {
-  margin-top: auto;
-  padding-top: var(--spacing-sm);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
+  display: none; /* Hide download count for cleaner look like screenshots */
 }
 
-.downloads {
-  font-size: 0.75rem;
-  color: var(--color-text-tertiary);
-  font-weight: 500;
-}
-
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .content {
     padding: var(--spacing-sm);
   }
 
   .title {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
   }
 
   .author {
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
   }
 }
