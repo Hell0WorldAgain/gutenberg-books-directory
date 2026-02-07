@@ -20,12 +20,6 @@
   line-height: 1.2;
 }
 
-.titleAccent {
-  display: block;
-  color: var(--color-text-primary);
-  font-weight: 600;
-}
-
 .subtitle {
   font-size: 16px;
   color: #333333;
@@ -67,10 +61,12 @@
 
   .hero {
     margin-bottom: var(--spacing-xl);
+    padding:0px;
   }
 
   .genreGrid {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
+    padding: 0px;
   }
 }

@@ -58,7 +58,8 @@
 
 @media (max-width: 768px) {
   .genreCard {
-    padding: var(--spacing-md);
+    padding: 10px;
+    margin-bottom:0px;
   }
 
   .icon {
