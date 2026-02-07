@@ -16,19 +16,14 @@ export const Home: React.FC = () => {
 
   return (
     <div className={styles.home}>
-      <motion.div
-        className={styles.hero}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
+      <div className={styles.hero}>
         <h1 className={styles.title}>
           Gutenberg Project
         </h1>
         <p className={styles.subtitle}>
           A social cataloging website that allows you to freely search it's database of books, annotations, and reviews.
         </p>
-      </motion.div>
+      </div>
 
       <motion.div
         className={styles.genreGrid}

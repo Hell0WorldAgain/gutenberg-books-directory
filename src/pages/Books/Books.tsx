@@ -1,5 +1,3 @@
-// src/pages/Books/Books.tsx - OPTIMIZED FOR PERFORMANCE
-
 import { useEffect, useCallback, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SearchBar, BookCard, Loading } from '@/components';
@@ -8,7 +6,6 @@ import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import { GENRES } from '@/utils/constants';
 import styles from './Books.module.css';
 
-// Memoize BookCard to prevent unnecessary re-renders
 const MemoizedBookCard = memo(BookCard);
 
 export const Books: React.FC = () => {

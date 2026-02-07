@@ -42,6 +42,7 @@ export interface Genre {
   label: string;
   icon: string;
   topic: string;
+  arrow:string;
 }
 
 export interface SearchFilters {

@@ -1,6 +1,5 @@
-// src/components/BookCard/BookCard.tsx
+// src/components/BookCard/BookCard.tsx - OPTIMIZED FOR VIRTUALIZATION
 
-import { motion } from 'framer-motion';
 import { Book } from '@/types/book.types';
 import { getBookCoverUrl, formatAuthors, getViewableLink } from '@/utils/bookUtils';
 import styles from './BookCard.module.css';
@@ -10,7 +9,7 @@ interface BookCardProps {
   index: number;
 }
 
-export const BookCard: React.FC<BookCardProps> = ({ book, index }) => {
+export const BookCard: React.FC<BookCardProps> = ({ book }) => {
   const coverUrl = getBookCoverUrl(book);
   const authors = formatAuthors(book);
 
@@ -25,13 +24,9 @@ export const BookCard: React.FC<BookCardProps> = ({ book, index }) => {
   };
 
   return (
-    <motion.article
+    <article
       className={styles.bookCard}
       onClick={handleClick}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: index * 0.02 }}
-      whileHover={{ y: -8 }}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
@@ -63,15 +58,7 @@ export const BookCard: React.FC<BookCardProps> = ({ book, index }) => {
       <div className={styles.content}>
         <h3 className={styles.title}>{book.title}</h3>
         <p className={styles.author}>{authors}</p>
-        
-        {book.download_count > 0 && (
-          <div className={styles.meta}>
-            <span className={styles.downloads}>
-              ↓ {book.download_count.toLocaleString()}
-            </span>
-          </div>
-        )}
       </div>
-    </motion.article>
+    </article>
   );
 };
