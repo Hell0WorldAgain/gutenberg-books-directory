@@ -8,7 +8,7 @@ interface BookCardProps {
   index: number;
 }
 
-export const BookCard: React.FC<BookCardProps> = ({ book, index }) => {
+export const BookCard: React.FC<BookCardProps> = ({ book }) => {
   const coverUrl = getBookCoverUrl(book);
   const authors = formatAuthors(book);
 

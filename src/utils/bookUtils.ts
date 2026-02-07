@@ -42,9 +42,9 @@ export const getViewableLink = (book: Book): ViewableFormat | null => {
 /**
  * Get book cover image URL
  */
-export const getBookCoverUrl = (book: Book): string | null => {
+export const getBookCoverUrl = (book: Book): string | undefined => {
   const formats = book.formats || {};
-  return formats['image/jpeg'] || formats['image/png'] || null;
+  return formats['image/jpeg'] || formats['image/png'] || undefined;
 };
 
 /**
