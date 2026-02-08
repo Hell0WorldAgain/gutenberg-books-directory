@@ -1,5 +1,3 @@
-// src/types/book.types.ts
-
 export interface Author {
   name: string;
   birth_year: number | null;

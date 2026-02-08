@@ -1,5 +1,3 @@
-// src/components/SearchBar/SearchBar.tsx
-
 import { useState, useEffect } from 'react';
 import { useDebounce } from '@/hooks/useDebounce';
 import styles from './SearchBar.module.css';
@@ -11,7 +9,7 @@ interface SearchBarProps {
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   onSearch,
-  placeholder = 'Search by title or author...',
+  placeholder = 'Search',
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce(searchTerm, 500);

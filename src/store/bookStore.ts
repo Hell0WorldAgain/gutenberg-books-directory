@@ -1,5 +1,3 @@
-// src/store/bookStore.ts - OPTIMIZED FOR PERFORMANCE
-
 import { create } from 'zustand';
 import { Book, SearchFilters } from '@/types/book.types';
 import { apiService } from '@/services/api.service';

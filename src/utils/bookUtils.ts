@@ -1,11 +1,6 @@
-// src/utils/bookUtils.ts
-
 import { Book, ViewableFormat } from '@/types/book.types';
 
-/**
- * Get the best viewable format for a book
- * Priority: HTML > PDF > TXT
- */
+
 export const getViewableLink = (book: Book): ViewableFormat | null => {
   const formats = book.formats || {};
 
@@ -39,17 +34,17 @@ export const getViewableLink = (book: Book): ViewableFormat | null => {
   return null;
 };
 
-/**
- * Get book cover image URL
- */
+
+// Get book cover image URL
+
 export const getBookCoverUrl = (book: Book): string | undefined => {
   const formats = book.formats || {};
   return formats['image/jpeg'] || formats['image/png'] || undefined;
 };
 
-/**
- * Format author names
- */
+
+// Format author names
+
 export const formatAuthors = (book: Book): string => {
   if (!book.authors || book.authors.length === 0) {
     return 'Unknown Author';
@@ -57,17 +52,17 @@ export const formatAuthors = (book: Book): string => {
   return book.authors.map((author) => author.name).join(', ');
 };
 
-/**
- * Truncate text with ellipsis
- */
+
+// Truncate text with ellipsis
+
 export const truncateText = (text: string, maxLength: number): string => {
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength).trim() + '...';
 };
 
-/**
- * Debounce function for search input
- */
+
+// Debounce function for search input
+
 export const debounce = <T extends (...args: any[]) => any>(
   func: T,
   delay: number
@@ -80,9 +75,9 @@ export const debounce = <T extends (...args: any[]) => any>(
   };
 };
 
-/**
- * Format download count
- */
+
+// Format download count
+
 export const formatDownloadCount = (count: number): string => {
   if (count >= 1000000) {
     return `${(count / 1000000).toFixed(1)}M`;

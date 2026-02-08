@@ -1,5 +1,3 @@
-// src/services/api.service.ts
-
 import axios, { AxiosInstance } from 'axios';
 import { BooksResponse, SearchFilters } from '@/types/book.types';
 
@@ -19,7 +17,6 @@ class ApiService {
     // Request interceptor
     this.api.interceptors.request.use(
       (config) => {
-        // You can add auth tokens here if needed
         return config;
       },
       (error) => {
@@ -37,15 +34,13 @@ class ApiService {
     );
   }
 
-  /**
-   * Fetch books with filters and pagination
-   */
+
+  // Fetch books with filters and pagination
+  
   async fetchBooks(page: number = 1, filters: SearchFilters = {}): Promise<BooksResponse> {
     try {
       const params: Record<string, string | number> = {
-        page,
-        // Only fetch books with image covers
-        mime_type: 'image/',
+        page, mime_type: 'image/',
       };
 
       if (filters.genre) {
@@ -68,9 +63,9 @@ class ApiService {
     }
   }
 
-  /**
-   * Fetch a single book by ID
-   */
+  
+  // Fetch a single book by ID
+  
   async fetchBookById(id: number) {
     try {
       const response = await this.api.get(`/books/${id}`);
@@ -81,9 +76,9 @@ class ApiService {
     }
   }
 
-  /**
-   * Fetch books by IDs
-   */
+  
+  // Fetch books by IDs
+   
   async fetchBooksByIds(ids: number[]): Promise<BooksResponse> {
     try {
       const params = {

@@ -1,5 +1,3 @@
-// src/components/Loading/Loading.tsx
-
 import styles from './Loading.module.css';
 
 interface LoadingProps {
